@@ -10,10 +10,6 @@ var bcrypt = require('bcryptjs');
 var config = require('../config');
 var VerifyToken = require('./VerifyToken');
 
-router.get('/',(req,res)=>{
-  res.status(200).send('Hi');
-})
-
 router.post('/register', function(req, res) {
     var hashedPassword = bcrypt.hashSync(req.body.password, 8);
     
