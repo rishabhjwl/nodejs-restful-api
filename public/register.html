@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="/js/jquery-3.3.1.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    register
+    <input type="text" name="" value="" id="username" placeholder="username">
+    <input type="text" name="" value="" id="password" placeholder="password">
+    <button type="button" name="button" id="submit">Submit</button>
+
+    <script type="text/javascript">
+      $("#submit").click(function(){
+        var username=$("#username").val();
+        var password=$("#password").val();
+        var userData={
+          username:username,
+          password:password
+        }
+        $.ajax({
+          url: "/api/register",
+          type: "post",
+          data: userData,
+          success: function(resData) {
+            window.location=resData;
+          }
+        });
+      })
+    </script>
+
+  </body>
+</html>
