@@ -4,27 +4,35 @@
     <meta charset="utf-8">
     <title></title>
     <script src="/js/jquery-3.3.1.min.js" charset="utf-8"></script>
+    <script src="/js/jquery.cookie.min.js" charset="utf-8"></script>
   </head>
   <body>
     login
-    <input type="text" name="" value="" id="username" placeholder="username">
+    <input type="text" name="" value="" id="email" placeholder="email">
     <input type="text" name="" value="" id="password" placeholder="password">
     <button type="button" name="button" id="submit">Submit</button>
 
     <script type="text/javascript">
       $("#submit").click(function(){
-        var username=$("#username").val();
+        var email=$("#email").val();
         var password=$("#password").val();
         var userData={
-          username:username,
+          email:email,
           password:password
         }
         $.ajax({
-          url: "/api/login",
+          url: "/api/auth/login",
           type: "post",
           data: userData,
           success: function(resData) {
-            window.location=resData;
+            if (resData.auth) {
+              alert("success")
+              window.location='/profile';
+              // $.cookie('x-access-token',resData.token)
+            }
+            else{
+              alert(resData.data)
+            }
           }
         });
       })

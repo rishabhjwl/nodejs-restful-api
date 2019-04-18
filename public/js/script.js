@@ -1,21 +1,23 @@
 $("#submit").click(function(){
   var name=$("#name").val();
   var email=$("#email").val();
-  var mobileno=$("#mobileno").val();
+  var password=$("#password").val();
   var userData={
     name:name,
-    contact:{
-      email:email,
-      mobileno:mobileno
-    }
+    email:email,
+    password:password
   }
-  window.location="/data?name="+name;
   $.ajax({
-    url: "/data",
+    url: "/api/auth/register",
     type: "post",
     data: userData,
     success: function(resData) {
-      console.log(resData);
+      if(resData.success){
+        window.location="/login";
+      }
+      else{
+        alert('something went wrong')
+      }
     }
   });
 
